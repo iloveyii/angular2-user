@@ -4,7 +4,11 @@ import { UserComponent } from './components/user.component'
 @Component({
   selector: 'my-app',
   template: `
-    <user></user>
+    <ul>
+      <li> <a routerLink="/">Home</a></li>
+      <li> <a routerLink="/about">About</a></li>
+    </ul>
+    <router-outlet></router-outlet>
   `,
 })
 
