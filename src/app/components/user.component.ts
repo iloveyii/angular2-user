@@ -16,6 +16,7 @@ export class UserComponent  {
     showHobbies: boolean;
     buttonShowHobbyText: string;
     posts: Post[];
+    post: Post;
 
     constructor(private postsService: PostsService) {
         this.name = 'Alex Kan';
@@ -48,6 +49,18 @@ export class UserComponent  {
 
     deleteHobby(i) {
         this.hobbies.splice(i, 1);
+    }
+
+    addPost(title, body, userId) {
+        this.postsService.createPosts({
+            title:title,
+            body:body,
+            userId:userId
+        }).subscribe(posts => {
+            console.log(posts);
+        });
+
+
     }
 }
 

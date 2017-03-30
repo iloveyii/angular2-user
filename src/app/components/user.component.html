@@ -33,6 +33,20 @@
 <hr>
 
 <h3>Posts</h3>
+
+<form>
+    <label>Title:</label>
+    <input type="text" #title /><br />
+
+    <label>Body:</label>
+    <input type="text" #body /><br />
+
+    <label>User Id:  </label>
+    <input type="text" #userId /><br />
+
+    <button (click)="addPost(title.value, body.value, userId.value)">Add post</button>
+</form>
+
 <div *ngFor="let post of posts">
     <h3>{{post.title}}</h3>
     <p>{{post.body}}</p>
