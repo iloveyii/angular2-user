@@ -26,8 +26,14 @@ export class PostsService {
     updatePosts(data) {
         console.log(data);
         return this.http
-            .post(this.url+'/'+data.id, JSON.stringify(data))
+            .put(this.url+'/'+data.id, JSON.stringify(data))
             .map(res => res.json());
     }
 
+    deletePosts(data) {
+        console.log(data);
+        return this.http
+            .delete(this.url+'/'+data.id)
+            .map(res => res.json());
+    }
 }
