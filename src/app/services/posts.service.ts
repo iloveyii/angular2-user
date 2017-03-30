@@ -10,16 +10,24 @@ export class PostsService {
         console.log('PostsService Initialized');
     }
 
-    getPosts() {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        return this.http.get(this.url, headers).map(res => res.json());
-    }
-
     createPosts(data) {
         console.log(data);
         return this.http
             .post(this.url, JSON.stringify(data))
             .map(res => res.json());
     }
+
+    readPosts() {
+        let headers = new Headers();
+        headers.append('Accept', 'application/json');
+        return this.http.get(this.url, headers).map(res => res.json());
+    }
+
+    updatePosts(data) {
+        console.log(data);
+        return this.http
+            .post(this.url+'/'+data.id, JSON.stringify(data))
+            .map(res => res.json());
+    }
+
 }

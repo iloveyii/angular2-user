@@ -30,7 +30,7 @@ export class UserComponent  {
         this.showHobbies = false;
         this.buttonShowHobbyText = 'Show Hobbies';
 
-        this.postsService.getPosts().subscribe(posts => {
+        this.postsService.readPosts().subscribe(posts => {
             this.posts = posts;
         });
 
@@ -59,8 +59,17 @@ export class UserComponent  {
         }).subscribe(posts => {
             console.log(posts);
         });
+    }
 
-
+    updatePost(id, title, body, userId) {
+        this.postsService.createPosts({
+            id:id,
+            title:title,
+            body:body,
+            userId:userId
+        }).subscribe(posts => {
+            console.log(posts);
+        });
     }
 }
 

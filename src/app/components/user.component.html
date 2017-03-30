@@ -45,6 +45,7 @@
     <input type="text" #userId /><br />
 
     <button (click)="addPost(title.value, body.value, userId.value)">Add post</button>
+    <button (click)="updatePost(101, title.value, body.value, userId.value)">Update post</button>
 </form>
 
 <div *ngFor="let post of posts">
