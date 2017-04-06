@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PostsService {
-    private url = 'http://jsonplaceholder.typicode.com/posts';
+    private url = 'http://localhost:9090/posts';
 
     constructor(private http: Http) {
         console.log('PostsService Initialized');
@@ -12,9 +12,24 @@ export class PostsService {
 
     createPosts(data:any) {
         console.log(data);
+        let body = this.toUrlEncoded(data);
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+
         return this.http
-            .post(this.url, JSON.stringify(data))
-            .map(res => res.json());
+            .post(this.url, body, options)
+            .map(res =>  res.json());
+    }
+
+    toUrlEncoded(obj) {
+        var str = [];
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))
+                console.log(key + " -> " + obj[key]);
+            }
+        }
+        return str.join("&");
     }
 
     readPosts() {
