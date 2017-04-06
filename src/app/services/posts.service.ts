@@ -10,7 +10,7 @@ export class PostsService {
         console.log('PostsService Initialized');
     }
 
-    createPosts(data) {
+    createPosts(data:any) {
         console.log(data);
         return this.http
             .post(this.url, JSON.stringify(data))
@@ -23,14 +23,14 @@ export class PostsService {
         return this.http.get(this.url, headers).map(res => res.json());
     }
 
-    updatePosts(data) {
+    updatePosts(data:any) {
         console.log(data);
         return this.http
             .put(this.url+'/'+data.id, JSON.stringify(data))
             .map(res => res.json());
     }
 
-    deletePosts(data) {
+    deletePosts(data:any) {
         console.log(data);
         return this.http
             .delete(this.url+'/'+data.id)

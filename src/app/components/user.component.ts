@@ -41,17 +41,17 @@ export class UserComponent  {
         this.buttonShowHobbyText = this.showHobbies ? 'Hide Hobbies' : 'Show Hobbies';
     }
 
-    addHobby(hobby) {
+    addHobby(hobby:any) {
         if(hobby.length > 0) {
             this.hobbies.push(hobby);
         }
     }
 
-    deleteHobby(i) {
+    deleteHobby(i:any) {
         this.hobbies.splice(i, 1);
     }
 
-    addPost(title, body, userId) {
+    addPost(title:string, body:string, userId:string) {
         this.postsService.createPosts({
             title:title,
             body:body,
@@ -61,7 +61,7 @@ export class UserComponent  {
         });
     }
 
-    updatePost(id, title, body, userId) {
+    updatePost(id:number, title:string, body:string, userId:number) {
         this.postsService.createPosts({
             id:id,
             title:title,
