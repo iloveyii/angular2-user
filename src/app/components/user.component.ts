@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
 import { PostsService } from '../services/posts.service';
+import { HobbyService } from '../services/hobby.service';
 
 @Component({
     moduleId: module.id,
     selector: 'user',
     templateUrl: 'user.component.html',
-    providers: [PostsService]
+    providers: [PostsService, HobbyService]
 })
 
 export class UserComponent  {
+
     name: string;
     email: string;
-    address: address;
-    hobbies: string[];
+    address: Address;
+    hobbies: Hobby[];
     showHobbies: boolean;
     buttonShowHobbyText: string;
     posts: Post[];
     post: Post;
 
-    constructor(private postsService: PostsService) {
+    constructor(private postsService: PostsService, private hobbyService: HobbyService) {
         this.name = 'Alex Kan';
         this.email = 'johnDoe@email.com';
         this.address = {
@@ -26,7 +28,20 @@ export class UserComponent  {
             city: 'Bromma',
             state: 'ST'
         };
-        this.hobbies = ['Music', 'Movies', 'Sports'];
+        this.hobbies = [
+            {
+                id:1,
+                name:'Music'
+            },
+            {
+                id:2,
+                name:'Movies'
+            },
+            {
+                id:3,
+                name:'Sports'
+            }
+        ];
         this.showHobbies = false;
         this.buttonShowHobbyText = 'Show Hobbies';
 
@@ -43,7 +58,11 @@ export class UserComponent  {
 
     addHobby(hobby:any) {
         if(hobby.length > 0) {
-            this.hobbies.push(hobby);
+            this.hobbies.push({id:null,name:hobby});
+
+            this.hobbyService.create(hobby).subscribe(hobbys => {
+                console.log(hobbys);
+            });
         }
     }
 
@@ -52,12 +71,14 @@ export class UserComponent  {
     }
 
     addPost(title:string, body:string, userId:string) {
-        this.postsService.createPosts({
+        let data = {
             title:title,
             body:body,
             userId:userId
-        }).subscribe(posts => {
+        };
+        this.postsService.createPosts(data).subscribe(posts => {
             console.log(posts);
+            // this.posts.push(data);
         });
     }
 
@@ -73,7 +94,7 @@ export class UserComponent  {
     }
 }
 
-interface address {
+interface Address {
     street: string;
     city: string;
     state: string;
@@ -83,4 +104,9 @@ interface Post {
     id: number;
     title: string;
     body: string;
+}
+
+interface Hobby {
+    id: number,
+    name: string
 }

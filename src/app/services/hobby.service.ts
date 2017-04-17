@@ -3,14 +3,14 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class PostsService {
-    private url = 'http://localhost:9090/posts';
+export class HobbyService {
+    private url = 'http://localhost:9090/hobbys';
 
     constructor(private http: Http) {
-        console.log('PostsService Initialized');
+        console.log('Hobby Service Initialized');
     }
 
-    createPosts(data:any) {
+    create(data:any) {
         console.log(data);
         let body = this.toUrlEncoded(data);
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -32,20 +32,20 @@ export class PostsService {
         return str.join("&");
     }
 
-    readPosts() {
+    read() {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
         return this.http.get(this.url, headers).map(res => res.json());
     }
 
-    updatePosts(data:any) {
+    update(data:any) {
         console.log(data);
         return this.http
             .put(this.url+'/'+data.id, JSON.stringify(data))
             .map(res => res.json());
     }
 
-    deletePosts(data:any) {
+    delete(data:any) {
         console.log(data);
         return this.http
             .delete(this.url+'/'+data.id)
