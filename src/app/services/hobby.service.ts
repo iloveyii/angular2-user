@@ -11,6 +11,7 @@ export class HobbyService {
     }
 
     create(data:any) {
+
         console.log(data);
         let body = this.toUrlEncoded(data);
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -46,7 +47,6 @@ export class HobbyService {
     }
 
     delete(data:any) {
-        console.log(data);
         return this.http
             .delete(this.url+'/'+data.id)
             .map(res => res.json());

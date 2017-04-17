@@ -54,7 +54,14 @@ export class HobbyComponent {
         }
     }
 
-    deleteHobby(i:any) {
+    deleteHobby(i:number) {
+        if(this.hobbies[i]) {
+            let h = this.hobbies[i];
+            this.hobbyService.delete(h).subscribe(hobbys => {
+                console.log('Deleted hobby with id: '+h.id);
+            });
+        }
+
         this.hobbies.splice(i, 1);
     }
 }
